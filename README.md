@@ -11,10 +11,10 @@
 </div>
  
 ## Description   
-A Szegedy QUantum WALks Simulator
+A Szegedy QUantum WALks Simulator.
 
 ## Installation  
-First, clone the repository   
+First, clone the repository.
 ```bash
 git clone https://github.com/OrtegaSA/squwals-repo
 ```
