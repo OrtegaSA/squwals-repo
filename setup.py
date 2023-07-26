@@ -8,7 +8,7 @@ setup(name='squwals',
       description='Szegedy Quantum Walk Simulator',
       author='Sergio A. Ortega and Miguel A. Martin-Delgado',
       author_email='sortega5892@gmail.com',
-      url='https://github.com/OrtegaSA/TSNAN',
+      url='https://github.com/OrtegaSA/squwals-repo',
       license='Apache 2.0',
       # classifiers=[
       #   "Environment :: Console",
