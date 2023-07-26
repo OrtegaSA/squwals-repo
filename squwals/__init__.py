@@ -20,13 +20,11 @@ efficient manner, saving time and memory resources.
 
 __version__ = '1.0'
 
-# from squwals.source import *
-
-from squwals.source import Unitary, Swap, Oracle, Reflection, Measurement
-from squwals.source import SingleUnitary, DoubleUnitary
-from squwals.source import create_initial_state
-from squwals.source import classical_walk_simulator, quantum_szegedy_simulator, mixed_state_simulator
-from squwals.source import semiclassical_szegedy_simulator, quantum_pagerank
+from squwals.operators import Unitary, Swap, Oracle, Reflection, Measurement
+from squwals.operators import SingleUnitary, DoubleUnitary
+from squwals.utils import create_initial_state
+from squwals.simulators import classical_walk_simulator, quantum_szegedy_simulator, mixed_state_simulator
+from squwals.applications import semiclassical_szegedy_simulator, quantum_pagerank
 
 __all__ = [
     'Unitary',
