@@ -14,7 +14,7 @@
 
 """SQUWALS: A Szegedy QUantum WALks Simulator.
 
-High-level applications.
+High-level applications of the quantum walk.
 """
 
 import numpy as np

@@ -14,7 +14,7 @@
 
 """SQUWALS: A Szegedy QUantum WALks Simulator.
 
-Simulators.
+Simulators of the walks.
 """
 
 import numpy as np
