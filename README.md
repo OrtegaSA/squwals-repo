@@ -55,7 +55,6 @@ There is a tutorial for using SQUWALS in the folder Tutorials, as well as exampl
   author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
   journal={arXiv:2307.14314},
   year={2023},
-  publisher={...}
 }
 ```
 
