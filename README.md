@@ -3,7 +3,7 @@
 # SQUWALS
 
 <!--
-[![arXiv](http://img.shields.io/badge/arXiv-....svg)](https://arxiv.org/abs/...)
+[![arXiv](http://img.shields.io/badge/arXiv-2307.14314.svg)](https://arxiv.org/abs/2307.14314)
 
 [![Journal](http://img.shields.io/badge/....svg)](https://...)
 -->
@@ -52,6 +52,17 @@ There is a tutorial for using SQUWALS in the folder Tutorials, as well as exampl
 @article{ortega2023squwals,
   title={SQUWALS: A Szegedy QUantum WALks Simulator},
   author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
+  journal={arXiv:2307.14314},
+  year={2023},
+  publisher={...}
+}
+```
+
+<!---
+```
+@article{ortega2023squwals,
+  title={SQUWALS: A Szegedy QUantum WALks Simulator},
+  author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
   journal={...},
   volume={...},
   number={...},
@@ -60,3 +71,4 @@ There is a tutorial for using SQUWALS in the folder Tutorials, as well as exampl
   publisher={...}
 }
 ```
+-->
