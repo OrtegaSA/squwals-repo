@@ -2,9 +2,10 @@
  
 # SQUWALS
 
-<!--
+
 [![arXiv](http://img.shields.io/badge/arXiv-2307.14314.svg)](https://arxiv.org/abs/2307.14314)
 
+<!--
 [![Journal](http://img.shields.io/badge/....svg)](https://...)
 -->
 
