@@ -124,7 +124,7 @@ def quantum_pagerank(google_matrix,time_steps=1000,apr_phase_1=None,apr_phase_2=
         time_steps: Number of steps of the quantum walk.
         apr_phase_1: Arbitrary phase rotation of the first reflection (optional).
         apr_phase_2: Arbitrary phase rotation of the second reflection (optional).
-        unitary_operator: unitary operator model (optional). Default: U=SRSR.
+        unitary: unitary operator model (optional). Default: U=SRSR.
         measure: An intenger indicating the register for measuring. Default: second register.
     
     Returns:
