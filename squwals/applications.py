@@ -37,7 +37,7 @@ def semiclassical_szegedy_simulator(transition_matrix,time_steps=100,unitary='si
         monitor: If True, the number of current simulated states is printed.
     
     Returns:
-        semiclassical_matrices: A tensor with the probability distributions at each time step.
+        semiclassical_matrices: A tensor with the semiclassical matrices at each time step.
             -If both registers are being measured, a tuple with 2 elements is returned.
     """
     
