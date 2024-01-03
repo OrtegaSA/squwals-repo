@@ -296,7 +296,13 @@ class Reflection():
             apr_phase: Phase for the arbitrary phase rotation (optional).
             extended_phases: Matrix with the phases of the extended Szegedy model (optional).
             name: Custom name for the reflection operator.
+        
+        Raises:
+            Exception: If the transition matrix is not column-stochastic.
         """
+        
+        if np.allclose(np.sum(transition_matrix,axis=0),np.ones(np.shape(transition_matrix)[1])) != True:
+            raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
         
         if name is not None:
             self.info_string += f' {name}'

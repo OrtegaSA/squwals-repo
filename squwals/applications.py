@@ -28,7 +28,7 @@ def semiclassical_szegedy_simulator(transition_matrix,time_steps=100,unitary='si
     Args:
         transition_matrix: Classical column-stochastic transition matrix.
         time_steps: Number of quantum time steps.
-        unitary: unitary operator model (optional). Default is 'single', so U = SR, constructing R from transition_matrix.
+        unitary: Unitary operator model (optional). Default is 'single', so U = SR, constructing R from transition_matrix.
         batch_size: Number of states being vectorized at a batch.
         measure: Register to measure:
             -'X' or 'x' or 1: register 1.
@@ -124,7 +124,7 @@ def quantum_pagerank(google_matrix,time_steps=1000,apr_phase_1=None,apr_phase_2=
         time_steps: Number of steps of the quantum walk.
         apr_phase_1: Arbitrary phase rotation of the first reflection (optional).
         apr_phase_2: Arbitrary phase rotation of the second reflection (optional).
-        unitary: unitary operator model (optional). Default: U=SRSR.
+        unitary: Unitary operator model (optional). Default: U=SRSR.
         measure: An intenger indicating the register for measuring. Default: second register.
     
     Returns:
