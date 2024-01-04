@@ -49,7 +49,7 @@ def build_google_matrix_nx(graph,alpha=0.85):
     # For our software the Google matrix is the transpose of the one provided by networkX.
     google_matrix = nx.google_matrix(graph_aux,alpha).T
     
-    return google_matrix
+    return np.squeeze(np.asarray(google_matrix))
 
 def semiclassical_pagerank(semiclassical_matrices,time_steps=1000):
     """Semiclassical PageRank simulator. It calculates the limiting distribution of a set
