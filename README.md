@@ -44,6 +44,7 @@ This package includes some high-level applications:
 
 - Quantum PageRank
 - Semiclassical Szegedy Walk
+- Quantum, Semiclassical and Randomized SearchRank
 
 ## Tutorials
 There is a tutorial for using SQUWALS in the folder Tutorials, as well as examples of the high-level applications. 
