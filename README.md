@@ -15,6 +15,8 @@
 A Szegedy QUantum WALks Simulator.
 
 ## Installation  
+Open a system's console or an Anaconda Prompt depending on your python installation.
+
 First, clone the repository.
 ```bash
 git clone https://github.com/OrtegaSA/squwals-repo
