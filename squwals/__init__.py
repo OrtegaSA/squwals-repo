@@ -18,11 +18,11 @@ This is a package with utilities to simulate Szegedy's quantum walk in an
 efficient manner, saving time and memory resources.
 """
 
-__version__ = '1.1'
+__version__ = '1.2'
 
 from squwals.operators import Unitary, Swap, Oracle, Reflection, Measurement
 from squwals.operators import SingleUnitary, DoubleUnitary
-from squwals.utils import create_initial_state
+from squwals.utils import create_initial_state, create_psi_states
 from squwals.simulators import classical_walk_simulator, quantum_szegedy_simulator, mixed_state_simulator
 from squwals.applications import semiclassical_szegedy_simulator, quantum_pagerank
 from squwals.searchrank import build_google_matrix_nx, semiclassical_pagerank, quantum_searchrank, semiclassical_searchrank
@@ -36,6 +36,7 @@ __all__ = [
     'SingleUnitary',
     'DoubleUnitary',
     'create_initial_state',
+    'create_psi_states',
     'classical_walk_simulator',
     'quantum_szegedy_simulator',
     'mixed_state_simulator',

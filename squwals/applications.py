@@ -39,7 +39,13 @@ def semiclassical_szegedy_simulator(transition_matrix,time_steps=100,unitary='si
     Returns:
         semiclassical_matrices: A tensor with the semiclassical matrices at each time step.
             -If both registers are being measured, a tuple with 2 elements is returned.
+    
+    Raises:
+        Exception: If the transition matrix is not column-stochastic.
     """
+    
+    if np.allclose(np.sum(transition_matrix,axis=0),np.ones(np.shape(transition_matrix)[1])) != True:
+        raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
     
     # Create the unitary operator if one of the two default options is chosen.
     if unitary == 'single':

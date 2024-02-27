@@ -33,11 +33,11 @@ def classical_walk_simulator(transition_matrix,time_steps=100,initial_distributi
         probability_distributions: NumPy tensor of shape (time_steps+1, N), distributions of the walker at each time step.
         
     Raises:
-            Exception: If the transition matrix is not column-stochastic.
+        Exception: If the transition matrix is not column-stochastic.
     """
     
     if np.allclose(np.sum(transition_matrix,axis=0),np.ones(np.shape(transition_matrix)[1])) != True:
-            raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
+        raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
     
     N = np.shape(transition_matrix)[1]  # Size of the graph.
     distribution = initial_distribution
