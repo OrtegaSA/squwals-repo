@@ -278,7 +278,7 @@ class Reflection():
         info_string: A string with the information of the operator.
         psi_matrix: Matrix Psi needed for the reflection.
         apr_factor: Factor used in the arbitrary phase rotation.
-        apr_phase: Phase for the arbitrary phase rotation.
+        apr_phase: Phase or list of phases for the arbitrary phase rotations.
         extended_factors: Factors to multiply the psi_matrix in the extended Szegedy model.
         extended_phases: Angles of the extended Szegedy model.
         class_type: Kind of class.
@@ -313,12 +313,23 @@ class Reflection():
             self.extended_factors = np.expand_dims(np.exp(1j*self.extended_phases).T,axis=2)
             self.psi_matrix = self.psi_matrix*self.extended_factors  # The psi_matrix is modified by the extended phases.
             self.info_string += ' (extended model)'
-        if apr_phase is None:
-            self.apr_factor = 2  # The default apr factor is 2.
+        try:
+            len(apr_phase)
+            self.multi_phases = True
+        except TypeError:
+            self.multi_phases = False
+        if self.multi_phases == False:
+            if apr_phase is None:
+                self.apr_factor = 2  # The default apr factor is 2.
+            else:
+                self.apr_phase = apr_phase
+                self.apr_factor = 1-np.exp(1j*apr_phase)
+                self.info_string += f': apr_phase = {apr_phase:.2f}'
         else:
             self.apr_phase = apr_phase
-            self.apr_factor = 1-np.exp(1j*apr_phase)
-            self.info_string += f': apr_phase = {apr_phase:.2f}'
+            self.apr_factor = 1-np.array(np.exp(1j*np.array(apr_phase)))
+            self.apr_factor = np.expand_dims(self.apr_factor,axis=[0,2])
+            self.info_string += f': apr_phase = {list(apr_phase)}'
             
     def __str__(self):
         """Function for printing the operator string."""
@@ -352,9 +363,14 @@ class Reflection():
                 state = np.transpose(state.reshape([N,N,state.shape[1]]),axes=(1,0,2))
                 
         # Apply the operations corresponding to the reflection.
-        C_matrix = np.sum(self.psi_matrix * state, axis=0, keepdims=True);
-        state_parallel = self.psi_matrix*C_matrix
-        state = self.apr_factor*state_parallel - state
+        if self.multi_phases == False:
+            C_matrix = np.sum(np.conj(self.psi_matrix) * state, axis=0, keepdims=True);
+            state_parallel = self.psi_matrix*C_matrix
+            state = self.apr_factor*state_parallel - state
+        else:
+            C_matrix = np.sum(np.conj(self.psi_matrix) * state, axis=0, keepdims=True) * self.apr_factor;
+            state_parallel = self.psi_matrix*C_matrix
+            state = state_parallel - state
         
         if mode == 'vector':  # Detensorize to the original shape.
             if dimension == 1:
@@ -459,7 +475,7 @@ class SingleUnitary(Unitary):
 
         Args:
             transition_matrix: Classical column-stochastic transition matrix.
-            apr_phase: Phase for the arbitrary phase rotation (optional).
+            apr_phase: Phase or list of phases for the arbitrary phase rotations (optional).
             extended_phases: Matrix with the phases of the extended Szegedy model (optional).
             name: Custom name for the unitary operator.
         """
@@ -487,8 +503,8 @@ class DoubleUnitary(Unitary):
 
         Args:
             transition_matrix: Classical column-stochastic transition matrix.
-            apr_phase_1: Phase for the arbitrary phase rotation of the first reflection (optional).
-            apr_phase_2: Phase for the arbitrary phase rotation of the second reflection (optional).
+            apr_phase_1: Phase or list of phases for the arbitrary phase rotations of the first reflection (optional).
+            apr_phase_2: Phase or list of phases for the arbitrary phase rotations of the second reflection (optional).
             extended_phases_1: Matrix with the phases of the extended Szegedy model of the first reflection (optional).
             extended_phases_2: Matrix with the phases of the extended Szegedy model of the second reflection (optional).
             name: Custom name for the unitary operator.

@@ -19,16 +19,17 @@ Utils of the packcage.
 
 import numpy as np
 
-def create_initial_state(transition_matrix,coefficients=None,nodes=None):
+def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended_phases=None):
     """Creates a suitable initial state from the transition matrix.
 
     Args:
         transition_matrix: Classical column-stochastic transition matrix.
+        coefficients: List of coefficients for the linear combination of the psi_i states. Default: 1/np.sqrt(len(nodes)).
+        nodes: List of nodes corresponding to the psi_i states of the linear combination. Default: all nodes.
+        extended_phases: Angles of the extended Szegedy model.
     
     Returns:
         initial_state: NumPy tensor of shape (N,) representing the initial state.
-        coefficients: List of coefficients for the linear combination of the psi_i states. Default: 1/np.sqrt(len(nodes)).
-        nodes: List of nodes corresponding to the psi_i states of the linear combination. Default: all nodes.
         
     Raises:
         Exception: If the transition matrix is not column-stochastic.
@@ -57,10 +58,15 @@ def create_initial_state(transition_matrix,coefficients=None,nodes=None):
     
     # The initial state is created unrolling the matrix that results of the product of the coefficients
     # and the square root of the transition matrix.
-    initial_state = np.ravel((coefficients_total*np.sqrt(transition_matrix)).T)
+    if extended_phases is None:
+        initial_state = np.ravel((coefficients_total*np.sqrt(transition_matrix)).T)
+    else:
+        extended_phases = np.array(extended_phases)
+        extended_factors = np.exp(1j*extended_phases).T
+        initial_state = np.ravel((coefficients_total*np.sqrt(transition_matrix)*extended_factors).T)
     return initial_state
 
-def create_psi_states(transition_matrix,nodes=None):
+def create_psi_states(transition_matrix,nodes=None,extended_phases=None):
     """Creates the psi_i position states from the transition matrix.
     
     Args:
@@ -69,6 +75,7 @@ def create_psi_states(transition_matrix,nodes=None):
             -int: Return a single psi_i state.
             -list: Return a batch with the psi_i states.
             -default: Return a batch with all the psi_i states.
+        extended_phases: Angles of the extended Szegedy model.
 
     Returns:
         psi_state: NumPy tensor of shape (N,) representing the psi_i state.
@@ -86,13 +93,31 @@ def create_psi_states(transition_matrix,nodes=None):
     if nodes is None:
         nodes = np.arange(N)
     
-    if type(nodes) == int:  # Create a single psi_i state.
-        psi_state = np.zeros([N**2])
-        psi_state[N*nodes:N*nodes+N] = np.sqrt(transition_matrix[:,nodes])
-        return psi_state
-    
-    else:  # Create a batch with the psi_i states.
-        psi_batch = np.zeros([N**2,len(nodes)])
-        for index, node in enumerate(nodes):
-            psi_batch[N*node:N*node+N,index] = np.sqrt(transition_matrix[:,node])
-        return psi_batch
+    if extended_phases is None:
+        
+        if type(nodes) == int:  # Create a single psi_i state.
+            psi_state = np.zeros([N**2])
+            psi_state[N*nodes:N*nodes+N] = np.sqrt(transition_matrix[:,nodes])
+            return psi_state
+        
+        else:  # Create a batch with the psi_i states.
+            psi_batch = np.zeros([N**2,len(nodes)])
+            for index, node in enumerate(nodes):
+                psi_batch[N*node:N*node+N,index] = np.sqrt(transition_matrix[:,node])
+            return psi_batch
+        
+    else:
+        
+        extended_phases = np.array(extended_phases)
+        extended_factors = np.exp(1j*extended_phases).T
+        
+        if type(nodes) == int:  # Create a single psi_i state.
+            psi_state = np.zeros([N**2])*1j
+            psi_state[N*nodes:N*nodes+N] = np.sqrt(transition_matrix[:,nodes])*extended_factors[:,nodes]
+            return psi_state
+        
+        else:  # Create a batch with the psi_i states.
+            psi_batch = np.zeros([N**2,len(nodes)])*1j
+            for index, node in enumerate(nodes):
+                psi_batch[N*node:N*node+N,index] = np.sqrt(transition_matrix[:,node])*extended_factors[:,node]
+            return psi_batch
