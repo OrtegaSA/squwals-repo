@@ -5,9 +5,7 @@
 
 [![arXiv](http://img.shields.io/badge/arXiv-2307.14314-B31B1B.svg)](https://arxiv.org/abs/2307.14314)
 
-<!--
-[![Journal](http://img.shields.io/badge/....svg)](https://...)
--->
+[![Journal](http://img.shields.io/badge/Advanced_Quantum_Technologies-2024-4b44ce.svg)](https://https://onlinelibrary.wiley.com/doi/full/10.1002/qute.202400022)
 
 </div>
  
