@@ -48,7 +48,8 @@ This package includes some high-level applications:
 ## Tutorials
 There is a tutorial for using SQUWALS in the folder Tutorials, as well as examples of the high-level applications. 
 
-### Citation   
+### Citation 
+<!---
 ```
 @article{ortega2023squwals,
   title={SQUWALS: A Szegedy QUantum WALks Simulator},
@@ -57,18 +58,22 @@ There is a tutorial for using SQUWALS in the folder Tutorials, as well as exampl
   year={2023},
 }
 ```
-
-<!---
+-->
 ```
-@article{ortega2023squwals,
-  title={SQUWALS: A Szegedy QUantum WALks Simulator},
-  author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
-  journal={...},
-  volume={...},
-  number={...},
-  pages={...},
-  year={2023},
-  publisher={...}
+@article{ortega2024squwals,
+	title={SQUWALS: A Szegedy QUantum WALks Simulator},
+	author={Ortega, S. A. and Martin-Delgado, M. A.},
+	journal={Advanced Quantum Technologies},
+	pages = "2400022",
+	year={2024}
 }
 ```
--->
+
+For the graph-phased Szegdy quantum walk:
+
+@article{ortega2024graph-phased,
+  title={...},
+  author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
+  journal={arXiv:...},
+  year={2024},
+}
