@@ -48,6 +48,9 @@ This package includes some high-level applications:
 ## Tutorials
 There is a tutorial for using SQUWALS in the folder Tutorials, as well as examples of the high-level applications. 
 
+## v2.0
+This version allows the introduction of complex-phase extensions, as local arbitrary phase rotations, in order to simulate the graph-phased Szegedy quantum walk. A tutorial is included.
+
 ### Citation 
 <!---
 ```
@@ -68,12 +71,14 @@ There is a tutorial for using SQUWALS in the folder Tutorials, as well as exampl
 	year={2024}
 }
 ```
-
+<!---
 For the graph-phased Szegdy quantum walk:
-
+```
 @article{ortega2024graph-phased,
-  title={...},
+  title={Complex-Phase Extensions of Szegedy Quantum Walk on Graphs},
   author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
   journal={arXiv:...},
   year={2024},
 }
+```
+-->
