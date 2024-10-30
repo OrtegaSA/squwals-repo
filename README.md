@@ -75,7 +75,7 @@ For the graph-phased Szegedy quantum walk:
 ```
 @article{ortega2024graph-phased,
   title={Complex-Phase Extensions of Szegedy Quantum Walk on Graphs},
-  author={Ortega, Sergio A. and Martin-Delgado, Miguel Angel},
+  author={Ortega, S. A. and Martin-Delgado, M. A.},
   journal={arXiv:2410.22011},
   year={2024},
 }
