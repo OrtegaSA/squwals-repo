@@ -71,7 +71,7 @@ This version allows the introduction of complex-phase extensions, as local arbit
 	year={2024}
 }
 ```
-For the graph-phased Szegdy quantum walk:
+For the graph-phased Szegedy quantum walk:
 ```
 @article{ortega2024graph-phased,
   title={Complex-Phase Extensions of Szegedy Quantum Walk on Graphs},
