@@ -75,7 +75,7 @@ This version allows the introduction of complex-phase extensions, as local arbit
 For the graph-phased Szegedy quantum walk:
 ```
 @article{ortega2024graph-phased,
-	title={Complex-Phase Extensions of Szegedy Quantum Walk on Graphs},
+	title={Complex-Phase Extensions of the Szegedy Quantum Walk on Graphs},
 	author={Ortega, S. A. and Martin-Delgado, M. A.},
 	journal={Physical Review A},
 	volume = {111},
