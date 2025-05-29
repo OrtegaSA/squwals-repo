@@ -42,7 +42,7 @@ def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended
         raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
     
     if extended_phases is not None and link_phases is not None:
-        raise ValueError("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
+        raise Exception("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
     
     if link_phases is not None:
         extended_phases = link_phases
@@ -99,7 +99,7 @@ def create_psi_states(transition_matrix,nodes=None,extended_phases=None,link_pha
         raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
     
     if extended_phases is not None and link_phases is not None:
-        raise ValueError("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
+        raise Exception("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
     
     if link_phases is not None:
         extended_phases = link_phases
