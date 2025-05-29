@@ -67,16 +67,19 @@ This version allows the introduction of complex-phase extensions, as local arbit
 	title={SQUWALS: A Szegedy QUantum WALks Simulator},
 	author={Ortega, S. A. and Martin-Delgado, M. A.},
 	journal={Advanced Quantum Technologies},
-	pages = "2400022",
+  	volume = {7},
+	pages = {2400022},
 	year={2024}
 }
 ```
 For the graph-phased Szegedy quantum walk:
 ```
 @article{ortega2024graph-phased,
-  title={Complex-Phase Extensions of Szegedy Quantum Walk on Graphs},
-  author={Ortega, S. A. and Martin-Delgado, M. A.},
-  journal={arXiv:2410.22011},
-  year={2024},
+	title={Complex-Phase Extensions of Szegedy Quantum Walk on Graphs},
+	author={Ortega, S. A. and Martin-Delgado, M. A.},
+	journal={Physical Review A},
+	volume = {111},
+	pages = {032216},
+	year={2025},
 }
 ```
