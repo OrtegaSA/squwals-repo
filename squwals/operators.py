@@ -288,21 +288,29 @@ class Reflection():
     info_string = 'Reflection'
     class_type = 'operator'
     
-    def __init__(self,transition_matrix,apr_phase=None,extended_phases=None,name=None):
+    def __init__(self,transition_matrix,apr_phase=None,extended_phases=None,link_phases=None,name=None):
         """Initializes the reflection operator.
 
         Args:
             transition_matrix: Classical column-stochastic transition matrix.
             apr_phase: Phase for the arbitrary phase rotation (optional).
             extended_phases: Matrix with the phases of the extended Szegedy model (optional).
+            link_phases: Alias for extended_phases.
             name: Custom name for the reflection operator.
         
         Raises:
             Exception: If the transition matrix is not column-stochastic.
+            Exception: If values are provided for both extended_phases and link_phases.
         """
         
         if np.allclose(np.sum(transition_matrix,axis=0),np.ones(np.shape(transition_matrix)[1])) != True:
             raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
+        
+        if extended_phases is not None and link_phases is not None:
+            raise ValueError("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
+        
+        if link_phases is not None:
+            extended_phases = link_phases
         
         if name is not None:
             self.info_string += f' {name}'
@@ -310,9 +318,10 @@ class Reflection():
         self.psi_matrix = np.sqrt(transition_matrix).reshape(N,N,1)  # Creates the psi_matrix from the transition matrix.
         if extended_phases is not None:
             self.extended_phases = np.array(extended_phases)
+            self.link_phases = self.extended_phases
             self.extended_factors = np.expand_dims(np.exp(1j*self.extended_phases).T,axis=2)
             self.psi_matrix = self.psi_matrix*self.extended_factors  # The psi_matrix is modified by the extended phases.
-            self.info_string += ' (extended model)'
+            self.info_string += ' - link phases'
         try:
             len(apr_phase)
             self.multi_phases = True
@@ -324,12 +333,12 @@ class Reflection():
             else:
                 self.apr_phase = apr_phase
                 self.apr_factor = 1-np.exp(1j*apr_phase)
-                self.info_string += f': apr_phase = {apr_phase:.2f}'
+                self.info_string += f' - global APR phase = {apr_phase:.2f}'
         else:
             self.apr_phase = apr_phase
             self.apr_factor = 1-np.array(np.exp(1j*np.array(apr_phase)))
             self.apr_factor = np.expand_dims(self.apr_factor,axis=[0,2])
-            self.info_string += f': apr_phase = {list(apr_phase)}'
+            self.info_string += f' - local APR phases'
             
     def __str__(self):
         """Function for printing the operator string."""

@@ -19,7 +19,7 @@ Utils of the packcage.
 
 import numpy as np
 
-def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended_phases=None):
+def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended_phases=None,link_phases=None):
     """Creates a suitable initial state from the transition matrix.
 
     Args:
@@ -27,6 +27,7 @@ def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended
         coefficients: List of coefficients for the linear combination of the psi_i states. Default: 1/np.sqrt(len(nodes)).
         nodes: List of nodes corresponding to the psi_i states of the linear combination. Default: all nodes.
         extended_phases: Angles of the extended Szegedy model.
+        link_phases: Alias for extended_phases.
     
     Returns:
         initial_state: NumPy tensor of shape (N,) representing the initial state.
@@ -34,10 +35,17 @@ def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended
     Raises:
         Exception: If the transition matrix is not column-stochastic.
         Exception: If coefficients and nodes have different length.
+        Exception: If values are provided for both extended_phases and link_phases.
     """
     
     if np.allclose(np.sum(transition_matrix,axis=0),np.ones(np.shape(transition_matrix)[1])) != True:
         raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
+    
+    if extended_phases is not None and link_phases is not None:
+        raise ValueError("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
+    
+    if link_phases is not None:
+        extended_phases = link_phases
     
     N = transition_matrix.shape[0]
     
@@ -66,7 +74,7 @@ def create_initial_state(transition_matrix,coefficients=None,nodes=None,extended
         initial_state = np.ravel((coefficients_total*np.sqrt(transition_matrix)*extended_factors).T)
     return initial_state
 
-def create_psi_states(transition_matrix,nodes=None,extended_phases=None):
+def create_psi_states(transition_matrix,nodes=None,extended_phases=None,link_phases=None):
     """Creates the psi_i position states from the transition matrix.
     
     Args:
@@ -76,6 +84,7 @@ def create_psi_states(transition_matrix,nodes=None,extended_phases=None):
             -list: Return a batch with the psi_i states.
             -default: Return a batch with all the psi_i states.
         extended_phases: Angles of the extended Szegedy model.
+        link_phases: Alias for extended_phases.
 
     Returns:
         psi_state: NumPy tensor of shape (N,) representing the psi_i state.
@@ -83,10 +92,17 @@ def create_psi_states(transition_matrix,nodes=None,extended_phases=None):
         
     Raises:
         Exception: If the transition matrix is not column-stochastic.
+        Exception: If values are provided for both extended_phases and link_phases.
     """
     
     if np.allclose(np.sum(transition_matrix,axis=0),np.ones(np.shape(transition_matrix)[1])) != True:
         raise Exception('The transition matrix is not column-stochastic. See tutorial: https://github.com/OrtegaSA/squwals-repo/tree/main/Tutorials')
+    
+    if extended_phases is not None and link_phases is not None:
+        raise ValueError("The declaration of both extended_phases and link_phases is ambiguous. Use only one.")
+    
+    if link_phases is not None:
+        extended_phases = link_phases
     
     N = transition_matrix.shape[0]
     
