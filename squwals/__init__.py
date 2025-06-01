@@ -18,7 +18,7 @@ This is a package with utilities to simulate Szegedy's quantum walk in an
 efficient manner, saving time and memory resources.
 """
 
-__version__ = '2.0'
+__version__ = '2.1'
 
 from squwals.operators import Unitary, Swap, Oracle, Reflection, Measurement
 from squwals.operators import SingleUnitary, DoubleUnitary
