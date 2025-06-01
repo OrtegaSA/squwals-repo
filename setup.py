@@ -4,7 +4,7 @@ with open("requirements.txt") as f:
     REQUIREMENTS = f.read().splitlines()
 
 setup(name='squwals',
-      version='2.0',
+      version='2.2',
       description='Szegedy Quantum Walk Simulator',
       author='Sergio A. Ortega and Miguel A. Martin-Delgado',
       author_email='sortega5892@gmail.com',
