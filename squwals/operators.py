@@ -40,6 +40,7 @@ class Unitary():
         
         self.string = ''
         self.info_string = 'Custom unitary:'
+        self.name = name
         if name is not None:
             self.info_string += f' {name}'
         if operators is None:  # Initialize an empty unitary.
@@ -77,7 +78,7 @@ class Unitary():
             state: Initial vector state.
             mode: A string to indicate whether the initial state is a vector or
               a matrix state.
-              protect: Whether to protect or no the initial state variable
+            protect: Whether to protect or no the initial state variable
         
         Returns:
             state: Final vector after the operations.
@@ -110,6 +111,12 @@ class Unitary():
             return Unitary(unitary_2.operators + self.operators)
         else:
             return Unitary([unitary_2] + self.operators)
+    
+    def inverse(self):
+        """Invert the unitary operator."""
+        
+        inverse_operator = Unitary([operator.inverse() for operator in self.operators][::-1],self.name)
+        return inverse_operator
         
 
 class Swap():
@@ -170,6 +177,11 @@ class Swap():
         """Multiplication of two unitary operators in an algebraic form."""
         
         return Unitary([self]) * unitary_2
+    
+    def inverse(self):
+        """Invert the unitary operator."""
+        
+        return self
 
 class Oracle():
     """Oracle operator.
@@ -198,6 +210,7 @@ class Oracle():
             name: Custom name for the oracle operator.
         """
         
+        self.name = name
         if name is not None:
             self.info_string += f' {name}'
         self.register = register
@@ -269,6 +282,14 @@ class Oracle():
         """Multiplication of two unitary operators in an algebraic form."""
         
         return Unitary([self]) * unitary_2
+    
+    def inverse(self):
+        """Invert the unitary operator."""
+        
+        inverse_operator = self.__class__.__new__(self.__class__)
+        inverse_operator.__dict__ = self.__dict__.copy()
+        inverse_operator.factor = np.conj(self.factor)
+        return inverse_operator
 
 class Reflection():
     """Reflection operator.
@@ -312,6 +333,7 @@ class Reflection():
         if link_phases is not None:
             extended_phases = link_phases
         
+        self.name = name
         if name is not None:
             self.info_string += f' {name}'
         N = np.shape(transition_matrix)[1];  # Size of the graph.
@@ -393,6 +415,14 @@ class Reflection():
         """Multiplication of two unitary operators in an algebraic form."""
         
         return Unitary([self]) * unitary_2
+    
+    def inverse(self):
+        """Invert the unitary operator."""
+        
+        inverse_operator = self.__class__.__new__(self.__class__)
+        inverse_operator.__dict__ = self.__dict__.copy()
+        inverse_operator.apr_factor = np.conj(self.apr_factor)
+        return inverse_operator
 
 class Measurement():
     """Class to obtain the probability distributions.
