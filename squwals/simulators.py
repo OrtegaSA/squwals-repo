@@ -115,7 +115,7 @@ def core_szegedy_simulator(unitary='single',state=None,time_steps=100,measure=1)
         return probability_distributions
 
 def quantum_szegedy_simulator(unitary,initial_state,time_steps=100,measure=1,protect=True):
-    """Simulator of the Szegedy quantum walk
+    """Simulator of the Szegedy quantum walk.
 
     Args:
         unitary: Unitary operator model.

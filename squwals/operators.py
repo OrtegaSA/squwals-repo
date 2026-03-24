@@ -461,7 +461,7 @@ class Measurement():
     info_string = 'Measurement'
     
     def __init__(self,register):
-        """Initializes the oracle operator.
+        """Initializes the measurement operator.
 
         Args:
             register: Register to measure:
