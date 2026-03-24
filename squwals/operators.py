@@ -116,6 +116,7 @@ class Unitary():
         """Invert the unitary operator."""
         
         inverse_operator = Unitary([operator.inverse() for operator in self.operators][::-1],self.name)
+        
         return inverse_operator
         
 
@@ -252,7 +253,7 @@ class Oracle():
         """
         
         if mode == 'vector':  # Tensorize into a matrix state.
-            if protect: state = state.copy()  # Protect the initial state variable in this mode
+            if protect: state = state.copy()  # Protect the initial state variable in this mode.
             shape = state.shape
             dimension = len(shape)
             N = int(np.sqrt(shape[0]))
@@ -289,6 +290,15 @@ class Oracle():
         inverse_operator = self.__class__.__new__(self.__class__)
         inverse_operator.__dict__ = self.__dict__.copy()
         inverse_operator.factor = np.conj(self.factor)
+        
+        inverse_operator.info_string = 'Oracle'
+        if inverse_operator.name is not None: inverse_operator.info_string += f' {inverse_operator.name}'
+        inverse_operator.info_string += f': Register {inverse_operator.register}'
+        inverse_operator.info_string += f': nodes {inverse_operator.marked_nodes}'
+        if inverse_operator.phase is not None:
+            inverse_operator.phase = -self.phase
+            inverse_operator.info_string += f', phase = {inverse_operator.phase:.2f}'
+        
         return inverse_operator
 
 class Reflection():
@@ -422,6 +432,19 @@ class Reflection():
         inverse_operator = self.__class__.__new__(self.__class__)
         inverse_operator.__dict__ = self.__dict__.copy()
         inverse_operator.apr_factor = np.conj(self.apr_factor)
+        
+        inverse_operator.info_string = 'Reflection'
+        if inverse_operator.name is not None: inverse_operator.info_string += f' {inverse_operator.name}'
+        if inverse_operator.extended_phases is not None:
+            inverse_operator.info_string += ' - link phases'
+        if inverse_operator.multi_phases == False:
+            if inverse_operator.apr_phase is not None:
+                inverse_operator.apr_phase = -self.apr_phase
+                inverse_operator.info_string += f' - global APR phase = {inverse_operator.apr_phase:.2f}'
+        else:
+            inverse_operator.apr_phase = -self.apr_phase
+            inverse_operator.info_string += f' - local APR phases'
+        
         return inverse_operator
 
 class Measurement():
