@@ -348,12 +348,14 @@ class Reflection():
             self.info_string += f' {name}'
         N = np.shape(transition_matrix)[1];  # Size of the graph.
         self.psi_matrix = np.sqrt(transition_matrix).reshape(N,N,1)  # Creates the psi_matrix from the transition matrix.
+        self.extended_phases = extended_phases
         if extended_phases is not None:
             self.extended_phases = np.array(extended_phases)
             self.link_phases = self.extended_phases
             self.extended_factors = np.expand_dims(np.exp(1j*self.extended_phases).T,axis=2)
             self.psi_matrix = self.psi_matrix*self.extended_factors  # The psi_matrix is modified by the extended phases.
             self.info_string += ' - link phases'
+        self.apr_phase = apr_phase
         try:
             len(apr_phase)
             self.multi_phases = True
@@ -367,7 +369,6 @@ class Reflection():
                 self.apr_factor = 1-np.exp(1j*apr_phase)
                 self.info_string += f' - global APR phase = {apr_phase:.2f}'
         else:
-            self.apr_phase = apr_phase
             self.apr_factor = 1-np.array(np.exp(1j*np.array(apr_phase)))
             self.apr_factor = np.expand_dims(self.apr_factor,axis=[0,2])
             self.info_string += f' - local APR phases'
