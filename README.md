@@ -1,6 +1,9 @@
 <div align="center">    
  
 # SQUWALS
+Sergio A. Ortega and Miguel A. Martin-Delgado
+
+Departamento de Física Teórica, Universidad Complutense de Madrid, 28040 Madrid, Spain
 
 
 [![arXiv](http://img.shields.io/badge/arXiv-2307.14314-B31B1B.svg)](https://arxiv.org/abs/2307.14314)
